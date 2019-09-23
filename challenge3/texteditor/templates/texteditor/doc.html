@@ -1,0 +1,433 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Chat</title>
+    <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<style>
+        body {
+          background-color: white;
+          font-family: 'Karla', sans-serif;
+          padding-top: 0;
+        }
+        .cursor {
+          /*border-left: 3px solid #273a86;*/
+          height: 25px;
+          display: initial;
+        }
+        h1 {
+          padding-left: 25%;
+        }
+        h3{
+          padding-left: 15%;
+        }
+        .innerspanstyle {
+          color:red;
+          position: absolute;
+          width: 150px;
+          height: 50px;
+          top: 0;
+          margin-left: 70%;
+        }
+        .box {
+            width:70%;
+            height:200px;
+            background:#FFF;
+            margin:40px auto;
+        }
+
+        .effect5 {
+          position: relative;
+        }
+        div.hidden {
+            display: none
+        }
+        -webkit-box-shadow: -14px 9px 16px -5px rgba(6,85,53,1);
+        -moz-box-shadow: -14px 9px 16px -5px rgba(6,85,53,1);
+        box-shadow: -14px 9px 16px -5px rgba(6,85,53,1);
+        .textOnPage {
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          padding: 15px;
+        }
+        .container{
+          height: 800px;
+          width: 700px;
+        }
+        .curtain{
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          z-index: -2;
+          top: 0px;
+          left: 0px;
+        }
+        .dot {
+          height: 25px;
+          width: 25px;
+          border-radius: 50%;
+          display: inline-block;
+        }
+        html, body, #wrapper, #main, .post {
+          height: 100%;
+          width: 100%;
+        }
+
+        .post {
+          margin: 0;
+          left: 0;
+        }
+        #wrapper{
+          padding:0;
+        }
+
+        .post > header {
+          height:30%;
+        }
+        .post > #textOnPage{
+          height: 70%;
+        }
+
+
+
+    </style>
+  </head>
+
+
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="#">
+											<h3>Lorem ipsum</h3>
+											<p>Feugiat tempus veroeros dolor</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Dolor sit amet</h3>
+											<p>Sed vitae justo condimentum</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Feugiat veroeros</h3>
+											<p>Phasellus sed ultricies mi congue</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Etiam sed consequat</h3>
+											<p>Porta lectus amet ultricies</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							<section>
+								<ul class="actions stacked">
+									<li><a href="#" class="button large fit">Log In</a></li>
+								</ul>
+							</section>
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2 id="documentTitle"></h2>
+										<p></p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2019-5-21">May 21, 2019</time>
+										<a href="#" class="author"><span class="name"></span><span class="dot"></span></a>
+									</div>
+								</header>
+								<div contenteditable="true" class="textOnPage hidden" id="textOnPage"  name="name" width="100%" height="1000px"></div>
+
+							</article>
+
+						<!-- Pagination
+							<ul class="actions pagination">
+								<li><a href="" class="disabled button large previous">Previous Page</a></li>
+								<li><a href="#" class="button large next">Next Page</a></li>
+							</ul>-->
+
+					</div>
+
+      </div>
+
+		<!-- Scripts -->
+      <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  		<script src="{% static 'assets/js/browser.min.js' %}"></script>
+  		<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+  		<script src="{% static 'assets/js/util.js' %}"></script>
+  		<script src="{% static 'assets/js/main.js' %}"></script>
+      <script src="{% static 'caret-master/jquery.caret.js' %}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+      <script>
+        $( document ).ready(function() {
+          $('#textOnPage').fadeIn(1000).removeClass('hidden');
+          var typingTimer;
+          var cursorTimer;
+          var cursorInterval = 500;              //timer identifier
+          var doneTypingInterval = 500;  //time in ms, 5 second for example
+          notTyping = true;
+          thisEl = document.getElementById('textOnPage');
+          element = $("#textOnPage");
+          var range;
+          var sel;
+          window.currentSessionUsername = makeid();
+          window.currentSessionColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+          $(".name").html(window.currentSessionUsername);
+          $("#username").css('color', window.currentSessionColor);
+          $('.dot').css('background-color', window.currentSessionColor)
+          window.currentText = '';
+
+          window.caretPos = 0;
+          console.log("done setup");
+
+          //on keyup, start the countdown
+          $("#textOnPage").on('keyup', function (e) {
+            // get keycode of current keypress event
+            var code = (e.keyCode || e.which);
+            code = parseInt(code);
+            console.log(code);
+            // do nothing if it's an arrow key
+            if(code == 37 || code == 38 || code == 39 || code == 40) {
+                console.log("returning");
+                return;
+            }
+            console.log("got here");
+            // do normal behaviour for any other key
+            notTyping = false;
+            clearTimeout(typingTimer);
+            if ($('#textOnPage').html().trim()) {
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            }
+          });
+
+          //user is "finished typing," do something
+          function doneTyping () {
+            console.log('doneTyping');
+            //do something
+            var thisText = despanify(thisEl);
+            $.ajax({
+              async: true,
+              type: "POST",
+              url: "http://localhost:8000/documents/",
+              data: {
+                "message": thisText,
+                "room": "{{id}}",
+              },
+              success: function(data) {
+                // console.log("POST_SUCCESS");
+                // console.log(data['message']);
+              },
+              dataType: 'json'
+            });
+            text_to_set = spanifyGet(thisText);
+            $("#textOnPage").html(text_to_set);
+            var lengthOfTyped = thisText.length - window.currentText.length;
+
+            window.currentText = thisText;
+
+            var range = document.createRange();
+            var sel = window.getSelection();
+            range.setStart(thisEl, window.caretPos+lengthOfTyped);
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+
+            showCaretPos();
+
+            notTyping = true;
+          }
+          function putCursorsOnScreen(){
+            var numberOfCursorsDrawn = 0;
+            var span = document.createElement("span");
+            span.className = "cursor"
+            for (var i = 0; i < window.cursors.length; i++) {
+              if(window.cursors[i].name != window.currentSessionUsername){
+                spanHTML = '<span class="cursor" style="border-left: 1px solid '+ window.cursors[i].color +';"></span>';
+                index = window.cursors[i].position + numberOfCursorsDrawn;
+                numberOfCursorsDrawn++;
+                console.log('cursor: '+index);
+                console.log('caret: ' + $('#textOnPage').caret())
+                elementTarget = document.getElementById('textOnPage').childNodes[parseInt(index)];
+                $(spanHTML).insertBefore($(elementTarget));
+              }
+            }
+          }
+
+
+          setInterval(function(){
+            $.ajax({
+              async: true,
+              type: "GET",
+              url: "http://localhost:8000/documents/",
+              data: {
+                "room": "{{id}}",
+              },
+              success: function(data) {
+                if (notTyping) {
+                  var mongoText = data.docText.text;
+                  var despanified_html = despanify(thisEl);
+
+                  if ((despanified_html != mongoText) && notTyping) {
+                    //text_to_set = spanifyGet(data.docText.text);
+                    //console.log(text_to_set)
+                    var text_to_set = spanifyGet(mongoText);
+                    $("#textOnPage").html(text_to_set);
+                    window.currentText = mongoText;
+                    // var range = document.createRange();
+                    // var sel = window.getSelection();
+                    // range.setStart(thisEl.lastChild, 0);
+                    // range.collapse(true);
+                    // sel.removeAllRanges();
+                    // sel.addRange(range);
+                    // thisEl.focus();
+                    //spanify(el);
+                    //console.log("GET");
+                    //console.log(data.docText.text);
+                  }
+                  if (($("#documentTitle").text() != data.docText.title) && notTyping) {
+                    $("#documentTitle").text(data.docText.title);
+                  }
+                  //console.log(data);
+                  //console.log(length);
+                  //setTimeout(function(){
+
+                  window.cursors = data.cursors;
+
+                  console.log('asdfasdf');
+                  var range = document.createRange();
+                  var sel = window.getSelection();
+                  range.setStart(thisEl, window.caretPos);
+                  range.collapse(true);
+                  sel.removeAllRanges();
+                  sel.addRange(range);
+
+                  $('.cursor').remove();
+                  putCursorsOnScreen();
+
+                }
+              },
+              dataType: 'json'
+            });
+
+          }, 4000);
+
+
+          function makeid() {
+             var length = Math.floor(Math.random() * 10)+3
+             var result           = '';
+             var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+             var charactersLength = characters.length;
+             for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+             }
+             return result;
+          }
+
+          function showCaretPos() {
+            console.log('showCaretPos');
+            //Remove all the cursors
+            $('.cursor').remove();
+            //Get our cursor's clean position
+            window.caretPos = $("#textOnPage").caret();
+            //Put all the cursors back
+            putCursorsOnScreen();
+
+            console.log(window.caretPos);
+            //Store the clean cursor position
+            $.ajax({
+              async: true,
+              type: "POST",
+              url: "http://localhost:8000/cursors/",
+              data: {
+                "position": window.caretPos,
+                "document": "{{id}}",
+                "name": window.currentSessionUsername,
+                "color": window.currentSessionColor,
+              },
+              success: function(data) {
+                // console.log("POSITION: " + data.position);
+                  // console.log($("#textOnPage").val());
+                // console.log("CURSOR_POST_SUCCESS!!");
+                // console.log(color);
+                // console.log(randomName);
+              },
+              dataType: 'json'
+            });
+          }
+
+
+          thisEl.onkeydown = showCaretPos;
+          thisEl.onmouseup = showCaretPos;
+
+          function spanifyGet(someText){
+            compareThis = "";
+            for(text in someText){
+                if (someText[text] == " ") {
+                  compareThis += "<span contenteditable=\"false\">" + "&nbsp;" + "</span>&#8203;";
+                } else {
+                  compareThis += "<span contenteditable=\"false\">" + someText[text] + "</span>&#8203;";
+                }
+            }
+            return compareThis;
+          }
+
+          function despanify(el){
+            // console.log(document.activeElement);
+            var someText = "";
+            var nodes = el.childNodes;
+            for(item in nodes) {
+                if(nodes[item].nodeName == "SPAN"){
+                  for(letter in nodes[item].innerText){
+                    someText +=  nodes[item].innerText[letter];
+                  }
+                }else{
+                    for(letter in nodes[item].data){
+                      someText +=  nodes[item].data[letter];
+                    }
+                }
+            }
+            someText = someText.replace(/\u200B/g,'');
+
+            return someText;
+          }
+
+        });
+      </script>
+    </body>
+
+</html>
